@@ -103,15 +103,30 @@ int setval(int val, struct Node *n, int *p, struct Node **c)
 
     if (searchNode(val, n, &k))
         printf("Key value already exists\n");
-    
+
+    // cout << "before if\n";
+    // cout << "setval val2: " << val << endl;
     if (setval(val, n->child[k], p, c))
     {
+        // cout << "setval val: " << val << endl;
+        // if (val == 2)
+        // {
+        //     cout << "setval *p: " << *p << endl;
+        // }
         if (n->count < MAX)
         {
             fillNode(*p, *c, n, k);
+            // if (val == 2)
+            // {
+            //     cout << "setval *p: " << *p << endl;
+            // }
             return 0;
         }
         split(*p, *c, n, k, p, c);
+        // if (val == 2)
+        // {
+        //     cout << "setval *p: " << *p << endl;
+        // }
         return 1;
     }
     return 0;
@@ -324,7 +339,11 @@ struct Node* del(int val, struct Node *root)
 
 void print(Node *p)
 {
-    
+    for (int val : p->value)
+    {
+        cout << val << " ";
+    }
+    cout << endl;
 }
 
 int main()
@@ -334,33 +353,31 @@ int main()
     root = insert(3, root);
     root = insert(6, root);
     root = insert(7, root);
-    root = insert(2, root);
+    // root = insert(2, root);
 
-    // int child = root->child[0];
+    Node *child = root->child[1];
 
-    Node *child = root->child[0];
+    child = insert(2, child);
 
-    int rvalue = root->value[1];
-
-    root = insert(20, child);
-
-    int value = child->value[1];
-
-    cout << "rvalue: " << rvalue << endl;
-    cout << value << endl;
-
-    // cout << child->value[0] << endl;
-
-    // cout << (root->child[0]) << endl;
-    // cout << *(root->value[0]) << endl;
-
-    // int *value[MAX + 1];
-    // *value = root->child[0]->value;
-
-    // for (int *val : value)
+    // for (int val : child->value)
     // {
-    //     cout << "val: " << (*val) << endl;
+    //     cout << "child val: " << val << endl;
     // }
 
-    cout << root->count << endl;
+    // for (int val : root->value)
+    // {
+    //     cout << "val: " << val << endl;
+    //     for (Node *kid : child->child)
+    //     {
+    //         // for (int cval : kid->value)
+    //         // {
+    //         //     cout << "cval: " << cval << endl;
+    //         // }
+    //     }
+    // }
+
+    // int value = child->value[1];
+
+    // cout << "rvalue: " << rvalue << endl;
+    // cout << value << endl;
 }
